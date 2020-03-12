@@ -96,6 +96,17 @@ class DealsController {
       status: dealOpportunity ? 'success' : 'error',
     });
   }
+
+  async show(req, res) {
+    const deals = await Deals.find({});
+    if (!deals) {
+      return res
+        .status(404)
+        .json({ message: 'The database returned no results' });
+    }
+
+    return res.json(deals);
+  }
 }
 
 export default new DealsController();
